@@ -1,9 +1,9 @@
 [submodule "bbdd"]
-	path = bbdd
+	path = BBDD
 	url = git@github.com:TFM-UCM-Ciberseguridad-2026/BBDD.git
 [submodule "backend"]
-	path = backend
+	path = Backend
 	url = git@github.com:TFM-UCM-Ciberseguridad-2026/Backend.git
 [submodule "frontend"]
-	path = frontend
+	path = Frontend
 	url = git@github.com:TFM-UCM-Ciberseguridad-2026/Frontend.git
