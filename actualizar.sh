@@ -4,6 +4,9 @@ GREEN="\e[32m"
 YELLOW="\e[33m"
 RED="\e[31m"
 RESET="\e[0m"
+echo -e "${YELLOW}[*] Realizando un pull de seguridad...${RESET}"
+
+git pull --recurse-submodules
 
 echo -e "${YELLOW}[*] Buscando actualizaciones en Backend, Frontend y BBDD...${RESET}"
 

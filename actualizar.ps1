@@ -1,5 +1,9 @@
 Clear-Host
 
+Write-Host "Realizando un pull de seguridad..." -ForegroundColor Yellow
+
+git pull --recurse-submodules
+
 Write-Host "[*] Buscando actualizaciones en Backend, Frontend y BBDD..." -ForegroundColor Yellow
 
 git submodule update --remote
