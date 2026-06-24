@@ -6,7 +6,7 @@ git pull --recurse-submodules
 
 Write-Host "[*] Buscando actualizaciones en Backend, Frontend y BBDD..." -ForegroundColor Yellow
 
-git submodule update --remote
+git submodule foreach 'git checkout main && git pull origin main'
 
 $cambios = git status --porcelain
 if ([string]::IsNullOrWhiteSpace($cambios)) {

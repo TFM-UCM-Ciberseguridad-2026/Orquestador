@@ -10,7 +10,7 @@ git pull --recurse-submodules
 
 echo -e "${YELLOW}[*] Buscando actualizaciones en Backend, Frontend y BBDD...${RESET}"
 
-git submodule update --remote
+git submodule foreach 'git checkout main && git pull origin main'
 
 if [[ -z $(git status --porcelain) ]]; then
     echo -e "${GREEN}[+] Todos los submódulos están al día. No hay nada que subir al Orquestador.${RESET}"
