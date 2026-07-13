@@ -37,7 +37,7 @@ services:
     image: ghcr.io/tfm-ucm-ciberseguridad-2026/orquestador-frontend:latest
     container_name: tfm_frontend
     ports:
-      - "3000:80"
+      - "80:80"
     depends_on:
       - backend
     restart: always
