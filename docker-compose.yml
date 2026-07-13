@@ -19,9 +19,7 @@ services:
       retries: 5
 
   backend:
-    build: 
-      context: ./Backend
-      dockerfile: Dockerfile
+    image: ghcr.io/tfm-ucm-ciberseguridad-2026/orquestador-backend:latest
     container_name: tfm_backend
     ports:
       - "8080:8080"
@@ -36,9 +34,7 @@ services:
     restart: on-failure
 
   frontend:
-    build:
-      context: ./Frontend
-      dockerfile: Dockerfile
+    image: ghcr.io/tfm-ucm-ciberseguridad-2026/orquestador-frontend:latest
     container_name: tfm_frontend
     ports:
       - "3000:80"
