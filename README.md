@@ -36,6 +36,6 @@ sudo docker-compose up -d
 ```
 
 ### 3. Acceso
-- **Frontend (Orquestador HUD):** [http://localhost](http://localhost) *(ahora funciona por defecto en el puerto 80)*
-- **Neo4j Browser:** [http://localhost:7474](http://localhost:7474) *(Usuario: `neo4j` / Contraseña: `password`)*
+- **Frontend (Orquestador HUD):** [http://localhost](http://localhost)
+- **Neo4j Browser:** [http://localhost:7474](http://localhost:7474)
 - **Backend API:** Internamente en el puerto `8080`, aunque el Frontend se comunica con él a través del proxy `/api/`.
