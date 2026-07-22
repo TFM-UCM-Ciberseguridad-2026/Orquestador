@@ -20,6 +20,9 @@ services:
 
   backend:
     image: ghcr.io/tfm-ucm-ciberseguridad-2026/orquestador-backend:latest
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
     container_name: tfm_backend
     ports:
       - "8080:8080"
@@ -35,6 +38,9 @@ services:
 
   frontend:
     image: ghcr.io/tfm-ucm-ciberseguridad-2026/orquestador-frontend:latest
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
     container_name: tfm_frontend
     ports:
       - "80:80"

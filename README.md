@@ -24,16 +24,28 @@ Para ejecutar la aplicación (Frontend, Backend y Base de Datos) de forma sencil
 Dado que las imágenes generadas por GitHub Actions son **privadas**, necesitas iniciar sesión en el registro de contenedores usando un **Personal Access Token (PAT)** de GitHub (con permisos `read:packages`).
 
 ```bash
-echo "TU_TOKEN_GH_PAT" | sudo docker login ghcr.io -u TU_USUARIO_GITHUB --password-stdin
+echo "TU_TOKEN_GH_PAT" | docker login ghcr.io -u TU_USUARIO_GITHUB --password-stdin
 ```
 *(Si el comando devuelve "Login Succeeded", estás listo).*
 
 ### 2. Arrancar la aplicación
-Ejecuta el siguiente comando en la raíz del proyecto para descargar y arrancar las imágenes en segundo plano:
+Dependiendo de lo que quieras conseguir en esa primera ejecución (o en ejecuciones posteriores), debes elegir tu comando:
+
+**Si quieres que descargue TODO de internet (versión de producción):**
+Debes forzar la descarga de tus repositorios antes de levantar el entorno, de lo contrario podría priorizar construir tus carpetas locales por defecto. Esta es la opción ideal si no quieres modificar código.
 
 ```bash
-sudo docker-compose up -d
+docker-compose pull
+docker-compose up -d
 ```
+
+**Si quieres empezar trabajando con tu código local:**
+Ejecuta el comando forzando el *build*. Docker Compose construirá las imágenes a partir del código fuente actual en las carpetas `Backend` y `Frontend` y las ejecutará.
+
+```bash
+docker-compose up -d --build
+```
+
 
 ### 3. Acceso
 - **Frontend (Orquestador HUD):** [http://localhost](http://localhost)
