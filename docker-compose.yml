@@ -33,8 +33,8 @@ services:
       - PORT=8080
       # Credenciales Docker Hub para que Docker Scout funcione dentro del contenedor.
       # Crear un Personal Access Token (PAT) de solo lectura en: https://hub.docker.com/settings/security
-      - DOCKER_HUB_USER=julve
-      - DOCKER_HUB_TOKEN=dckr_pat_8v2MrY3ivKpidoqWuS9ggMK-aQU
+      - DOCKER_HUB_USER=${DOCKER_HUB_USER:-}
+      - DOCKER_HUB_TOKEN=${DOCKER_HUB_TOKEN:-}
     depends_on:
       neo4j:
         condition: service_healthy
