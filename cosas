@@ -1,0 +1,5 @@
+- el riesgo no se calcula correctamente al meter todo a mano
+- refactorizar orquestador
+- mas info en el panel de cves
+- calcular riesgo cambia el riesgo del attack path
+- arreglar lo del excel
