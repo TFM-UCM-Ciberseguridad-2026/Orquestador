@@ -20,6 +20,7 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
+    entrypoint: ["sh", "-c", "ollama serve > /dev/null 2>&1"]
     ports:
       - "11435:11434"
     volumes:
