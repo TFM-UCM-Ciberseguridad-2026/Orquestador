@@ -40,7 +40,7 @@ services:
         condition: service_healthy
     environment:
       - OLLAMA_HOST=http://ollama:11434
-    entrypoint: ["sh", "-c", "ollama pull gemma4:e4b"]
+    entrypoint: ["sh", "-c", "ollama pull gemma3:4b"]
     restart: "no"
 
   backend:
@@ -57,7 +57,7 @@ services:
       - NEO4J_PASSWORD=password
       - PORT=8080
       - OLLAMA_HOST=http://ollama:11434
-      - OLLAMA_MODEL=gemma4:e4b
+      - OLLAMA_MODEL=gemma3:4b
       # Credenciales Docker Hub para que Docker Scout funcione dentro del contenedor.
       # Crear un Personal Access Token (PAT) de solo lectura en: https://hub.docker.com/settings/security
       - DOCKER_HUB_USER=${DOCKER_HUB_USER:-}
