@@ -59,10 +59,11 @@ services:
       - PORT=8080
       - OLLAMA_HOST=http://ollama:11434
       - OLLAMA_MODEL=gemma3:4b
+      - AUDIT_LOG_PATH=/root/logs/audit.log
       # Credenciales Docker Hub para que Docker Scout funcione dentro del contenedor.
       # Crear un Personal Access Token (PAT) de solo lectura en: https://hub.docker.com/settings/security
       - DOCKER_HUB_USER=${DOCKER_HUB_USER:-}
-      - DOCKER_HUB_TOKEN=${DOCKER_HUB_TOKEN:-}
+      - DOCKER_HUB_TOKEN=${DOCKER_HUB_TOKEN:-}z
     depends_on:
       neo4j:
         condition: service_healthy
@@ -72,6 +73,7 @@ services:
         condition: service_completed_successfully
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./logs:/root/logs
     restart: on-failure
 
   frontend:
