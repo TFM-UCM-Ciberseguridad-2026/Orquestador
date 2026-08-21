@@ -63,12 +63,7 @@ services:
       # Credenciales Docker Hub para que Docker Scout funcione dentro del contenedor.
       # Crear un Personal Access Token (PAT) de solo lectura en: https://hub.docker.com/settings/security
       - DOCKER_HUB_USER=${DOCKER_HUB_USER:-}
-<<<<<<< HEAD
-      - DOCKER_HUB_TOKEN=${DOCKER_HUB_TOKEN:-}
-      - AUDIT_LOG_PATH=/root/logs/audit.log
-=======
       - DOCKER_HUB_TOKEN=${DOCKER_HUB_TOKEN:-}z
->>>>>>> 3cd44ac0fb31b32052d8a7772f25140d50548435
     depends_on:
       neo4j:
         condition: service_healthy
@@ -78,10 +73,6 @@ services:
         condition: service_completed_successfully
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-<<<<<<< HEAD
-      - ~/.docker/config.json:/root/.docker/config.json:ro
-=======
->>>>>>> 3cd44ac0fb31b32052d8a7772f25140d50548435
       - ./logs:/root/logs
     restart: on-failure
 
