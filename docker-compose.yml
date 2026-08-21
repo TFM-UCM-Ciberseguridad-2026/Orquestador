@@ -72,7 +72,6 @@ services:
         condition: service_completed_successfully
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.docker/config.json:/root/.docker/config.json:ro
     restart: on-failure
 
   frontend:
