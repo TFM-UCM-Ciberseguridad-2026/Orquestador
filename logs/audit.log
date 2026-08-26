@@ -1,0 +1,1 @@
+{"fecha_hora":"2026-08-25T08:38:13.470803012Z","nivel":"AUDIT","accion":{"tipo":"CREACION","tipo_activo":"InfrastructureImport","id_activo":"batch","nombre_activo":"GraphImport"},"justificacion":"Importación masiva de infraestructura JSON","estado":"SUCCESS"}
