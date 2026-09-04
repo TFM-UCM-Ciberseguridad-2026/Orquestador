@@ -8,6 +8,12 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/password
       - NEO4J_PLUGINS=["apoc"]
+      # Ajustes de memoria y transacciones (evita TransactionMemoryLimitExceeded / OutOfMemory)
+      - NEO4J_db_memory_transaction_max=0
+      - NEO4J_dbms_memory_transaction_total_max=0
+      - NEO4J_server_memory_heap_initial__size=1G
+      - NEO4J_server_memory_heap_max__size=2G
+      - NEO4J_server_memory_pagecache_size=1G
     volumes:
       - neo4j_data:/data
       - neo4j_logs:/logs
