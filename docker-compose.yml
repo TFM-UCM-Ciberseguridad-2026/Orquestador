@@ -18,7 +18,7 @@ services:
       - neo4j_data:/data
       - neo4j_logs:/logs
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"]
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -26,18 +26,25 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
-    entrypoint: ["sh", "-c", "ollama serve > /dev/null 2>&1"]
+    entrypoint: [ "sh", "-c", "ollama serve > /dev/null 2>&1" ]
     ports:
       - "11435:11434"
     volumes:
       - ollama_data:/root/.ollama
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "ollama", "list"]
+      test: [ "CMD", "ollama", "list" ]
       interval: 10s
       timeout: 5s
       retries: 10
       start_period: 15s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
 
   ollama-init:
     image: ollama/ollama:latest
@@ -47,7 +54,7 @@ services:
         condition: service_healthy
     environment:
       - OLLAMA_HOST=http://ollama:11434
-    entrypoint: ["sh", "-c", "ollama pull gemma3:4b"]
+    entrypoint: [ "sh", "-c", "ollama pull gemma3:4b" ]
     restart: "no"
 
   backend:
