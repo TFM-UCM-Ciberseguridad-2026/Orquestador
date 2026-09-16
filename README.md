@@ -29,23 +29,34 @@ echo "TU_TOKEN_GH_PAT" | docker login ghcr.io -u TU_USUARIO_GITHUB --password-st
 *(Si el comando devuelve "Login Succeeded", estás listo).*
 
 ### 2. Arrancar la aplicación
-Dependiendo de lo que quieras conseguir en esa primera ejecución (o en ejecuciones posteriores), debes elegir tu comando:
 
-**Si quieres que descargue TODO de internet (versión de producción):**
-Debes forzar la descarga de tus repositorios antes de levantar el entorno, de lo contrario podría priorizar construir tus carpetas locales por defecto. Esta es la opción ideal si no quieres modificar código.
+El archivo principal `docker-compose.yml` está configurado para **funcionar de forma universal en cualquier máquina (CPU por defecto)**, sin requerir hardware ni controladores específicos.
 
-```bash
-docker-compose pull
-docker-compose up -d
-```
+#### **ModoEstándar / CPU (Universal - Recomendado sin GPU):**
+Funciona en cualquier ordenador portátil, servidor o máquina sin gráfica NVIDIA.
 
-**Si quieres empezar trabajando con tu código local:**
-Ejecuta el comando forzando el *build*. Docker Compose construirá las imágenes a partir del código fuente actual en las carpetas `Backend` y `Frontend` y las ejecutará.
+- **Con imágenes de producción (GHCR):**
+  ```bash
+  docker compose pull
+  docker compose up -d
+  ```
+- **Compilando código local:**
+  ```bash
+  docker compose up -d --build
+  ```
 
-```bash
-docker-compose up -d --build
-```
+#### **Modo Aceleración por GPU (Opcional - NVIDIA GPU):**
+Si la máquina dispone de una GPU NVIDIA y el paquete `nvidia-container-toolkit` instalado, se puede habilitar la aceleración hardware para el modelo de lenguaje de Ollama combinando el archivo `docker-compose.gpu.yml`:
 
+- **Con imágenes de producción (GHCR):**
+  ```bash
+  docker compose pull
+  docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+  ```
+- **Compilando código local:**
+  ```bash
+  docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+  ```
 
 ### 3. Acceso
 - **Frontend (Orquestador HUD):** [http://localhost](http://localhost)
