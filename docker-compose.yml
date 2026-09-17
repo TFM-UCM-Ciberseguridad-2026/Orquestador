@@ -6,7 +6,7 @@ services:
       - "7474:7474" # HTTP
       - "7687:7687" # Bolt
     environment:
-      - NEO4J_AUTH=neo4j/password
+      - NEO4J_AUTH=${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-password}
       - NEO4J_PLUGINS=["apoc"]
       # Ajustes de memoria y transacciones (evita TransactionMemoryLimitExceeded / OutOfMemory)
       - NEO4J_db_memory_transaction_max=0
@@ -47,7 +47,7 @@ services:
         condition: service_healthy
     environment:
       - OLLAMA_HOST=http://ollama:11434
-    entrypoint: [ "sh", "-c", "ollama pull gemma3:4b" ]
+    entrypoint: [ "sh", "-c", "ollama pull ${OLLAMA_MODEL:-gemma3:4b}" ]
     restart: "no"
 
   backend:
@@ -57,20 +57,22 @@ services:
       dockerfile: Dockerfile
     container_name: tfm_backend
     ports:
-      - "8080:8080"
+      - "${PORT:-8080}:8080"
     environment:
+      - PORT=${PORT:-8080}
+      - ENV=${ENV:-development}
       - NEO4J_URI=neo4j://neo4j:7687
-      - NEO4J_USERNAME=neo4j
-      - NEO4J_PASSWORD=password
-      - PORT=8080
+      - NEO4J_USER=${NEO4J_USER:-neo4j}
+      - NEO4J_USERNAME=${NEO4J_USER:-neo4j}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-password}
       - OLLAMA_HOST=http://ollama:11434
-      - OLLAMA_MODEL=gemma3:4b
-      - AUDIT_LOG_PATH=/root/logs/audit.log
-      # Credenciales Docker Hub para que Docker Scout funcione dentro del contenedor.
-      # Crear un Personal Access Token (PAT) de solo lectura en: https://hub.docker.com/settings/security
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-gemma3:4b}
+      - NVD_API_KEY=${NVD_API_KEY:-}
+      - NVD_BASE_URL=${NVD_BASE_URL:-https://services.nvd.nist.gov/rest/json/cves/2.0}
+      - NVD_API_TIMEOUT=${NVD_API_TIMEOUT:-90}
       - DOCKER_HUB_USER=${DOCKER_HUB_USER:-}
       - DOCKER_HUB_TOKEN=${DOCKER_HUB_TOKEN:-}
-      - NVD_API_KEY=${NVD_API_KEY:-}
+      - AUDIT_LOG_PATH=/root/logs/audit.log
     depends_on:
       neo4j:
         condition: service_healthy
