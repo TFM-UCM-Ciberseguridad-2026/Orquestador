@@ -88,3 +88,15 @@ Si la máquina dispone de una GPU NVIDIA y el paquete `nvidia-container-toolkit`
 - **Frontend (Orquestador HUD):** [http://localhost](http://localhost)
 - **Neo4j Browser:** [http://localhost:7474](http://localhost:7474)
 - **Backend API:** Internamente en el puerto `8080`, aunque el Frontend se comunica con él a través del proxy `/api/`.
+
+### 3. Detener la Aplicación
+
+- **Parar los contenedores (conservando los datos persistentes de Neo4j y Ollama):**
+  ```bash
+  docker compose down
+  ```
+
+- **Parar los contenedores y ELIMINAR los volúmenes (reiniciar base de datos desde cero):**
+  ```bash
+  docker compose down -v
+  ```
